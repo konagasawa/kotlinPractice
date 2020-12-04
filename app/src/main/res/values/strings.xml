@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">KotlinPractice</string>
+
+    //Firebase
+    <string name="fb_users">users</string>
+    <string name="fb_toilets">toilets</string>
+    <string name="fb_comments">comments</string>
+</resources>

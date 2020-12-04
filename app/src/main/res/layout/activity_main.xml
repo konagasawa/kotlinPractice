@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/displayNameFieldTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+    </TextView>
+
+    <TextView
+        android:id="@+id/displayNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/displayNameFieldTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/displayNameEt"
+        android:text="UserName: "
+        >
+    </TextView>
+
+    <EditText
+        android:id="@+id/displayNameEt"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/displayNameFieldTv"
+        app:layout_constraintStart_toEndOf="@+id/displayNameTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+    </EditText>
+
+    <TextView
+        android:id="@+id/emailTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="email:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/emailEt"
+        app:layout_constraintTop_toBottomOf="@id/displayNameTv"
+        />
+    <EditText
+        android:id="@+id/emailEt"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/emailTv"
+        app:layout_constraintTop_toBottomOf="@+id/displayNameEt"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:inputType="textEmailAddress"
+        >
+    </EditText>
+
+    <TextView
+        android:id="@+id/passwordTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="passowrd:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/passwordEt"
+        app:layout_constraintTop_toBottomOf="@+id/emailTv" />
+    <EditText
+        android:id="@+id/passwordEt"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/passwordTv"
+        app:layout_constraintTop_toBottomOf="@+id/emailEt"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+    </EditText>
+
+    <Button
+        android:id="@+id/signUpBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="SIGN UP"
+        >
+    </Button>
+    <Button
+        android:id="@+id/signInBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/signUpBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="SIGN IN"
+        >
+    </Button>
+    <Button
+        android:id="@+id/checkBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/signInBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="CHECK"
+        android:visibility="gone"
+        >
+    </Button>
+    <Button
+        android:id="@+id/signOutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/checkBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="SIGN OUT"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/changeEmailBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/signOutBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="CHANGE EMAIL"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/setNewPasswordBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/changeEmailBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="NEW PASSWORD"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/sendPasswordResetBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/setNewPasswordBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="RESET PASSWORD"
+        >
+    </Button>
+
+    <Button
+        android:id="@+id/deleteUserBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/sendPasswordResetBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="DELETE USER"
+        >
+    </Button>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

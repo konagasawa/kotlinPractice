@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "906946380608",
+    "firebase_url": "https://kotlin-firebase-practice.firebaseio.com",
+    "project_id": "kotlin-firebase-practice",
+    "storage_bucket": "kotlin-firebase-practice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906946380608:android:7948256b90ea58d51cf0a5",
+        "android_client_info": {
+          "package_name": "com.technology.mycow.kotlinpractice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906946380608-e067k4u288ji5s1vcpqq0o650dpcak52.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACfzGOU1myEvX9Ltfx7vD9VSRp9jTFJdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906946380608-e067k4u288ji5s1vcpqq0o650dpcak52.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
