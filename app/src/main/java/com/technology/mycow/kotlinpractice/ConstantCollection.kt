@@ -10,7 +10,7 @@ class ConstantCollection {
         const val RETROFIT_BASE_URL: String = "https://api.themoviedb.org/3/"
         const val RETROFIT_POPULAR_MOVIE: String = "movie/popular"
         const val RETROFIT_QUERY_VALUE_API_KEY: String = "api_key"
-        
+
     }
 
 }
