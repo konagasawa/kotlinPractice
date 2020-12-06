@@ -16,6 +16,8 @@ class ConstantCollection {
         const val RETROFIT_CCC = "CCC"
         const val RETROFIT_DDD = "DDD"
         const val RETROFIT_EEE = "EEE"
+        const val RETROFIT_FFF = "FFF"
+    }
 
         const val RETROFIT_DDD = "DDD"
         const val RETROFIT_FFF = "FFF"
