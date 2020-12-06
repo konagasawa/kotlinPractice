@@ -11,10 +11,7 @@ class ConstantCollection {
         const val RETROFIT_POPULAR_MOVIE: String = "movie/popular"
         const val RETROFIT_QUERY_VALUE_API_KEY: String = "api_key"
         const val RETROFIT_API_KEY: String = "f4b7e5ccf9606a0350a04eec5b343df1"
-        const val RETROFIT_AAA = "AAA"
-        const val RETROFIT_BBB = "BBB"
-        const val RETROFIT_CCC = "CCC"
-        const val RETROFIT_EEE = "EEE"
+
 
     }
 
