@@ -11,6 +11,7 @@ class ConstantCollection {
         const val RETROFIT_POPULAR_MOVIE: String = "movie/popular"
         const val RETROFIT_AAA = "AAA"
         const val RETROFIT_CCC = "CCC"
+        const val RETROFIT_DDD = "DDD"
     }
 
 }
