@@ -8,12 +8,9 @@ import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 
 //sealed class Result<out R> {
 //    data class Success<out T>(val data : T) : Result<T>()
@@ -35,6 +32,10 @@ class FirebaseRepository {
     val isEmailChanged : LiveData<Boolean>? get() = emailChangedStatus
     val isSignedUp : LiveData<Boolean>? get() = signedUpStatus
     val isSignedIn : LiveData<Boolean>? get() = signedInStatus
+
+
+    val isToiletCommentUploaded: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+    val toiletLikedList: MutableLiveData<MutableMap<String, Int>> by lazy { MutableLiveData<MutableMap<String, Int>>() }
 
 
     suspend fun authSignInUser(email: String, password: String){
@@ -149,8 +150,8 @@ class FirebaseRepository {
         firebaseAuth.currentUser!!.updateProfile(profile).addOnCompleteListener { task ->
             if(task.isSuccessful){
                 Log.d(LOG_MSG, "UPDATE USER NAME")
-                currUser = User(firebaseAuth.currentUser!!.uid,
-                    firebaseAuth.currentUser!!.displayName!!
+//                currUser = User(firebaseAuth.currentUser!!.uid, firebaseAuth.currentUser!!.displayName!!
+                currUser = User(firebaseAuth.currentUser!!.uid, firebaseAuth.currentUser!!.displayName!!
                 )
                 currUserLiveData.postValue(currUser)
 
@@ -165,13 +166,86 @@ class FirebaseRepository {
     }
 
     private fun writeNewUser(user: User) {
-        firebaseRef.child(ConstantCollection.FIREBASE_USERS).push().setValue(user).addOnCompleteListener { task ->
+        firebaseRef.child(ConstantCollection.FIREBASE_USERS)
+            .child(user.userId)
+            .child(ConstantCollection.FIREBASE_USER_NAME)
+            .setValue(user.displayName)
+            .addOnCompleteListener { task ->
             if(task.isSuccessful) {
                 Log.d(LOG_MSG, "WRITE USER DONE")
             } else {
                 Log.d(LOG_MSG, "WRITE USER FAILED")
             }
         }
+
+//        firebaseRef.child(ConstantCollection.FIREBASE_USERS).push().setValue(user).addOnCompleteListener { task ->
+//            if(task.isSuccessful) {
+//                Log.d(LOG_MSG, "WRITE USER DONE")
+//            } else {
+//                Log.d(LOG_MSG, "WRITE USER FAILED")
+//            }
+//        }
+    }
+
+    data class UpdateComm( val comment: String, val postDate: Long, val liked: Boolean){
+        fun toMap(): Map<String, Any>{return mapOf(
+            ConstantCollection.FIREBASE_ATTR_TOILETCOMMENT to comment,
+            ConstantCollection.FIREBASE_ATTR_POSTDATE to postDate,
+            ConstantCollection.FIREBASE_ATTR_LIKED to liked)}
+    }
+
+    suspend fun addToiletComment(toildetId: String, comment: Comment) {
+
+        val commendOne = firebaseRef.child(ConstantCollection.FIREBASE_COMMENTS).child("TOILET_ID").child("-MOCCtM4yow9hEzE_pFZ")
+        val comm = UpdateComm("UPDATED!!",1600000000000,false)
+        commendOne.apply {
+            this.updateChildren(comm.toMap()).addOnCompleteListener { task ->
+                if(task.isSuccessful){
+                    Log.d(LOG_MSG, "UPPDAT COMMENT DONE")
+                } else {
+                    Log.d(LOG_MSG, "UPPDAT COMMENT FAILED")
+                }
+            }
+        }
+
+//        firebaseRef.child(ConstantCollection.FIREBASE_COMMENTS).child(toildetId).push().setValue(comment).addOnCompleteListener { task ->
+//            if(task.isSuccessful){
+//                Log.d(LOG_MSG, "ADD COMMENT DONE")
+//                isToiletCommentUploaded.postValue(true)
+//
+//                setNumberOfCommentsAndLiked("TOILET_ID")
+//
+//            } else {
+//                Log.d(LOG_MSG, "ADD COMMENT FAILED")
+//                isToiletCommentUploaded.postValue(false)
+//            }
+//        }
+    }
+
+    private fun setNumberOfCommentsAndLiked(toiletId: String){
+
+        val a = firebaseRef.child("info").child("TOILET_ID").key
+
+        val toiletCommentList = object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val resp: MutableMap<String, Comment> = snapshot.value as MutableMap<String, Comment>
+                var likedCounter = 0
+                resp.map { item ->
+                    val commentData = item.value as Map<String, String>
+                    if(commentData[ConstantCollection.FIREBASE_ATTR_LIKED] as Boolean){
+                        likedCounter++
+                    }
+                }
+                val toiletLikedListMap = mutableMapOf(
+                    ConstantCollection.FIREBASE_TOILETCOMMENT_TOTAL to resp.size,
+                    ConstantCollection.FIREBASE_TOILETCOMMENT_LIKED_TOTAL to likedCounter)
+                toiletLikedList.postValue(toiletLikedListMap)
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.d(LOG_MSG, "TOILET COMMENT ADDED CANCELED")
+            }
+        }
+        firebaseRef.child(ConstantCollection.FIREBASE_COMMENTS).child(toiletId).addValueEventListener(toiletCommentList)
     }
 
     suspend fun readToiletInfo(){

@@ -5,4 +5,9 @@
     <string name="fb_users">users</string>
     <string name="fb_toilets">toilets</string>
     <string name="fb_comments">comments</string>
+
+
+    <string name="default_info_title">Info Title</string>
+    <string name="INFO_SPIPPET">Info Snippet</string>
+
 </resources>
