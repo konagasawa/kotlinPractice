@@ -17,6 +17,8 @@ class FirebaseViewModel(application: Application, firebaseRepository: FirebaseRe
         mFirebaseRepository = firebaseRepository
     }
 
+    val likedState: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+
     val user : LiveData<User>?
         get() = mFirebaseRepository.user
 
@@ -28,6 +30,12 @@ class FirebaseViewModel(application: Application, firebaseRepository: FirebaseRe
 
     val isSignedIn : LiveData<Boolean>?
         get() = mFirebaseRepository.isSignedIn
+
+    val isToiletCommentUploaded : LiveData<Boolean>?
+        get() = mFirebaseRepository.isToiletCommentUploaded
+
+    val toiletLikedList: LiveData<MutableMap<String, Int>>?
+        get() = mFirebaseRepository.toiletLikedList
 
     fun authSignUpUser(email: String, password: String, displayName: String) = viewModelScope.launch(Dispatchers.IO){
         mFirebaseRepository.authSignUpUser(email, password, displayName)
@@ -60,6 +68,10 @@ class FirebaseViewModel(application: Application, firebaseRepository: FirebaseRe
 //    fun writeNewUser(childName: String, user: User) = viewModelScope.launch(Dispatchers.IO) {
 //        mFirebaseRepository.writeNewUser(childName, user)
 //    }
+
+    fun addToiletComment(toiletId: String, comment: Comment) = viewModelScope.launch(Dispatchers.IO){
+        mFirebaseRepository.addToiletComment(toiletId, comment)
+    }
 
     companion object {
         private const val LOG_MSG = "FirebaseViewModel: "
